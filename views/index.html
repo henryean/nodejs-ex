@@ -305,11 +305,11 @@ $ git push</pre>
                     </div>
 					<div>
 					  <% for (question in questionsList) { %>
-					  <p> <%= question.question %> </p>
+					  <p> <% question.question %> </p>
 					  <ul>
-					    <li><%= question.answer1 %></li>
-					    <li><%= question.answer2 %></li>
-					    <li><%= question.answer3 %></li>
+					    <li><% question.answer1 %></li>
+					    <li><% question.answer2 %></li>
+					    <li><% question.answer3 %></li>
 					  </ul>
 					  <%} %>
 					</div>
