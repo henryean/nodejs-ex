@@ -69,7 +69,7 @@ app.get('/', function (req, res) {
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
 	var questions = db.collection('questions');
-	questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
+	//questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
     col.count(function(err, count){
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questions });
     });
