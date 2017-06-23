@@ -269,13 +269,18 @@ $ git push</pre>
 
                 <h3>Web Console</h3>
                 <p>You can use the Web Console to view the state of your application components and launch new builds.</p>
-				<input type="text" id="question"></input>
-				<input type="text" id="answer1"></input>
-				<input type="text" id="answer2"></input>
-				<input type="text" id="answer3"></input>
-
-                <h3>Command Line</h3>
-                <p>With the <a href="http://docs.openshift.org/latest/cli_reference/overview.html">OpenShift command line interface</a> (CLI), you can create applications and manage projects from a terminal.</p>
+				<fieldset class="form-field">
+				  <label>Question: </label><input type="text" id="question"></input>
+				</fieldset>
+				<fieldset class="form-field">
+				  <label>Answer 1: </label><input type="text" id="answer1"></input>
+				</fieldset>
+				<fieldset class="form-field">
+				  <label>Answer 2: </label><input type="text" id="answer2"></input>
+				</fieldset>
+				<fieldset class="form-field">
+				  <label>Answer 3: </label><input type="text" id="answer3"></input>
+				</fieldset>
 
                 <h2>Development Resources</h2>
                   <ul>
@@ -298,6 +303,16 @@ $ git push</pre>
                           <tr><td>URL:</td><td><%= dbInfo.url %></td></tr>
                       </table>
                     </div>
+					<div>
+					  <% for (question in questions) { %>
+					  <p> <%= question.question %> </p>
+					  <ul>
+					    <li><%= question.answer1 %></li>
+					    <li><%= question.answer2 %></li>
+					    <li><%= question.answer3 %></li>
+					  </ul>
+					  <%} %>
+					</div>
                 <% } else { %>
                    <span class="code" id="count-value">No database configured</span>
                    </p>
