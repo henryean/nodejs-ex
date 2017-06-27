@@ -106,7 +106,15 @@ app.get('/questions', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('questions').find().toArray(function(err, questions ){
+	db.collection('questions').drop(function(err, callback){});
+	var questions = db.collection('questions');
+	var quest = new Object();
+	quest.question = 'What is this?';
+	quest.answer1 = 'An answer';
+	quest.answer2 = 'Something else';
+	quest.answer3 = 'Who knows';
+	questions.insert(quest);
+    questions.find().toArray(function(err, questions ){
       res.send(questions[1]);
     });
   } else {
