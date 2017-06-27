@@ -70,8 +70,11 @@ app.get('/', function (req, res) {
     col.insert({ip: req.ip, date: Date.now()});
 	var questions = db.collection('questions');
 	//questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
-    col.count(function(err, count){
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questions[0] });
+    //col.count(function(err, count){
+    //  res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questions[0] });
+    //});
+	col.count(function(err, count){
+      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails});
     });
   } else {
     res.render('index.html', { pageCountMessage : null});
