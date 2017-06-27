@@ -68,7 +68,7 @@ app.get('/', function (req, res) {
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
-	var questions = db.collection('questions');
+	//var questions = db.collection('questions');
 	//questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
     //col.count(function(err, count){
     //  res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questions[0] });
@@ -93,6 +93,21 @@ app.get('/pagecount', function (req, res) {
     });
   } else {
     res.send('{ pageCount: -1 }');
+  }
+});
+
+app.get('/questions', function (req, res) {
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    db.collection('questions').find().toArray(function(err, questions ){
+      res.send(questions);
+    });
+  } else {
+    res.send('{ questions: -1 }');
   }
 });
 
