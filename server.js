@@ -107,7 +107,7 @@ app.get('/questions', function (req, res) {
   }
   if (db) {
     db.collection('questions').find().toArray(function(err, questions ){
-      res.send(questions);
+      res.send(questions[1]);
     });
   } else {
     res.send('{ questions: -1 }');
