@@ -74,7 +74,7 @@ app.get('/', function (req, res) {
     });;
 	//questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
     col.count(function(err, count){
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList[0] });
+      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList });
     });
 	//col.count(function(err, count){
     //  res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails});
@@ -107,7 +107,7 @@ app.get('/questions', function (req, res) {
   }
   if (db) {
     db.collection('questions').find().toArray(function(err, questions ){
-      res.send(questions[0]);
+      res.send(questions);
     });
   } else {
     res.send('{ questions: -1 }');
