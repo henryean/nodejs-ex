@@ -74,7 +74,7 @@ app.get('/', function (req, res) {
     });
 	//questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
     col.count(function(err, count){
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList });
+      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList[0] });
     });
 	//col.count(function(err, count){
     //  res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails});
