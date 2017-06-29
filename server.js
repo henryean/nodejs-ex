@@ -68,10 +68,10 @@ app.get('/', function (req, res) {
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
-	var questionsList
+	var questionsList;
 	db.collection('questions').find().toArray(function(err, questions ){
       questionsList = questions;
-    });;
+    });
 	//questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
     col.count(function(err, count){
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList });
@@ -121,7 +121,7 @@ app.get('/questions', function (req, res) {
 	quest2.answer3 = 'Meh';
 	questions.insert(quest2);
     questions.find().toArray(function(err, questions ){
-      res.send(questions[0]);
+      res.send(questions);
     });
   } else {
     res.send('{ questions: -1 }');
