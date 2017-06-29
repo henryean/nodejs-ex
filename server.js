@@ -106,7 +106,7 @@ app.get('/questions', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-	db.collection('questions').drop(function(err, callback){});
+	//db.collection('questions').drop(function(err, callback){});
 	var questions = db.collection('questions');
 	var quest = new Object();
 	quest.question = 'What is this?';
