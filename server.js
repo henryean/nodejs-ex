@@ -120,8 +120,8 @@ app.get('/questions', function (req, res) {
 	quest2.answer2 = 'good?';
 	quest2.answer3 = 'Meh';
 	questions.insert(quest2);
-    questions.find().toArray(function(err, questions ){
-      res.send(questions);
+    questions.find().toArray(function(err, questionsList ){
+      res.send(questionsList);
     });
   } else {
     res.send('{ questions: -1 }');
