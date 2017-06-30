@@ -69,7 +69,7 @@ app.get('/', function (req, res) {
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
 	var questionsList;
-	db.collection('questions').find().toArray(function(err, questions ){
+	db.collection('vragen').find().toArray(function(err, questions ){
       questionsList = questions;
     });
 	//questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
@@ -107,7 +107,7 @@ app.get('/questions', function (req, res) {
   }
   if (db) {
 	//db.collection('questions').drop(function(err, callback){});
-	var questions = db.collection('questions');
+	var questions = db.collection('vragen');
 	var quest = new Object();
 	quest.question = 'What is this?';
 	quest.answer1 = 'An answer';
@@ -123,7 +123,7 @@ app.get('/questions', function (req, res) {
     //questions.find().toArray(function(err, questionsList ){
     //  res.send(questionsList);
     //});
-	db.collection('questions').count(function(err, count ){
+	questions.count(function(err, count ){
       res.send('{ questions: ' + count + '}');
     });
   } else {
