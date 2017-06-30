@@ -108,24 +108,24 @@ app.get('/questions', function (req, res) {
   if (db) {
 	//db.collection('questions').drop(function(err, callback){});
 	var questions = db.collection('vragen');
-	var quest = new Object();
-	quest.question = 'What is this?';
-	quest.answer1 = 'An answer';
-	quest.answer2 = 'Something else';
-	quest.answer3 = 'Who knows';
-	questions.insert(quest);
-	var quest2 = new Object();
-	quest2.question = 'How it going?';
-	quest2.answer1 = 'Something';
-	quest2.answer2 = 'good?';
-	quest2.answer3 = 'Meh';
-	questions.insert(quest2);
-    //questions.find().toArray(function(err, questionsList ){
-    //  res.send(questionsList);
-    //});
-	questions.count(function(err, count ){
-      res.send('{ questions: ' + count + '}');
+	//var quest = new Object();
+	//quest.question = 'What is this?';
+	//quest.answer1 = 'An answer';
+	//quest.answer2 = 'Something else';
+	//quest.answer3 = 'Who knows';
+	//questions.insert(quest);
+	//var quest2 = new Object();
+	//quest2.question = 'How it going?';
+	//quest2.answer1 = 'Something';
+	//quest2.answer2 = 'good?';
+	//quest2.answer3 = 'Meh';
+	//questions.insert(quest2);
+    questions.find().toArray(function(err, questionsList ){
+      res.send(questionsList);
     });
+	//questions.count(function(err, count ){
+    //  res.send('{ questions: ' + count + '}');
+    //});
   } else {
     res.send('{ questions: -1 }');
   }
