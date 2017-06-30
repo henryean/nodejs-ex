@@ -120,8 +120,11 @@ app.get('/questions', function (req, res) {
 	quest2.answer2 = 'good?';
 	quest2.answer3 = 'Meh';
 	questions.insert(quest2);
-    questions.find().toArray(function(err, questionsList ){
-      res.send(questionsList);
+    //questions.find().toArray(function(err, questionsList ){
+    //  res.send(questionsList);
+    //});
+	db.collection('questions').count(function(err, count ){
+      res.send('{ questions: ' + count + '}');
     });
   } else {
     res.send('{ questions: -1 }');
