@@ -304,19 +304,14 @@ $ git push</pre>
                       </table>
                     </div>
 					<div>
-					
-					  <p> <%= questionsList.question %> </p>
+					<% for (var question in questionsList) { %>
+					  <p> <%= question.question %> </p>
 					  <ul>
-					    <li><%= questionsList.answer1 %></li>
-					    <li><%= questionsList.answer2 %></li>
-					    <li><%= questionsList.answer3 %></li>
+					    <li><%= question.answer1 %></li>
+					    <li><%= question.answer2 %></li>
+					    <li><%= question.answer3 %></li>
 					  </ul>
-					  <p> <%= questionsList.question %> </p>
-					  <ul>
-					    <li><%= questionsList.answer1 %></li>
-					    <li><%= questionsList.answer2 %></li>
-					    <li><%= questionsList.answer3 %></li>
-					  </ul>
+					  <% } %>
 					</div>
                 <% } else { %>
                    <span class="code" id="count-value">No database configured</span>
