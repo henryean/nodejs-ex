@@ -131,6 +131,23 @@ app.get('/questions', function (req, res) {
   }
 });
 
+app.post('/newQuestion', function(req,res) {
+	var newQuest = req.body;
+	var quest = newObject();
+	quest.question = newQuest.question;
+	quest.answer1 = newQuest.answer1;
+	quest.answer2 = newQuest.answer2;
+	quest.answer3 = newQuest.answer3;
+	if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+	var questions = db.collection('vragen');
+	questions.insert(quest);
+	res.status(201).send(quest);
+  }
+});
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
