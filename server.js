@@ -133,7 +133,7 @@ app.get('/questions', function (req, res) {
 
 app.post('/newQuestion', function(req,res) {
 	var newQuest = req.body;
-	var quest = newObject();
+	var quest = new Object();
 	quest.question = newQuest.question;
 	quest.answer1 = newQuest.answer1;
 	quest.answer2 = newQuest.answer2;
