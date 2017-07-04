@@ -132,9 +132,10 @@ app.get('/questions', function (req, res) {
 });
 
 var bodyParser = require('body-parser');
-var parseUrlencoded = bodyParser.urlencoded({ extended: false});
-
-app.post('/newQuestion', parseUrlencoded, function(req,res) {
+//var parseUrlencoded = bodyParser.urlencoded({ extended: false});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.post('/newQuestion', function(req,res) {
 	var newQuest = req.body;
 	if (newQuest) {
 	var quest = new Object();
