@@ -136,6 +136,7 @@ var parseUrlencoded = bodyParser.urlencoded({ extended: false});
 
 app.post('/newQuestion', parseUrlencoded, function(req,res) {
 	var newQuest = req.body;
+	if (newQuest) {
 	var quest = new Object();
 	quest.question = newQuest.question;
 	quest.answer1 = newQuest.answer1;
@@ -149,6 +150,9 @@ app.post('/newQuestion', parseUrlencoded, function(req,res) {
 	questions.insert(quest);
 	res.status(201).send(quest);
   }
+	} else {
+		res.status(201).send(req.body);
+	}
 });
 
 // error handling
