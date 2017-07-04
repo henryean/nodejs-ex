@@ -131,7 +131,10 @@ app.get('/questions', function (req, res) {
   }
 });
 
-app.post('/newQuestion', function(req,res) {
+var bodyParser = require('body-parser');
+var parseUrlencoded = bodyParser.urlencoded({ extended: false});
+
+app.post('/newQuestion', parseUrlencoded, function(req,res) {
 	var newQuest = req.body;
 	var quest = new Object();
 	quest.question = newQuest.question;
