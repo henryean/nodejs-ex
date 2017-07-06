@@ -110,8 +110,10 @@ router.route('/:question')
     if(quest){
       if (db) {
         var questions = db.collection('vragen');
-	    var found = questions.findOne({_id : ObjectId("59568d8fcc38830018237a1b")});
-	    response.status(201).json(found);
+		questions.findOne({_id : quest}, function(err, doc) {
+        response.status(201).json(doc);
+    });
+	    
       }
     }else{
       response.status(404).json("Question not found");
