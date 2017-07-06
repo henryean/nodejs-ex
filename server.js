@@ -103,6 +103,29 @@ router
 		res.status(400).json('Invalid Question');
 	}
   });
+  
+router.route('/:question')
+  .get(function (request, response) {
+    var quest = cities[request.params.question];
+    if(quest){
+      if (db) {
+        var questions = db.collection('vragen');
+	    var found = questions.findOne({'question' : quest});
+	    res.status(201).json(found);
+      }
+    }else{
+      response.status(404).json("Question not found");
+    }
+  });
+
+  //.delete(function (request, response) {
+//    if(cities[request.cityName]){
+//      delete cities[request.cityName];
+//      response.sendStatus(200);
+//    }else{
+//      response.sendStatus(404);
+//    }
+//  });
 
 app.get('/old/', function (req, res) {
   // try to initialize the db on every request if it's not already
