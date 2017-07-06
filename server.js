@@ -64,12 +64,10 @@ var parseUrlencoded = bodyParser.urlencoded({ extended: false});
 
 router
 .route('/')
-  .all(function(req, res, next) {
+  .get(function (req, res) {
     if (!db) {
       initDb(function(err){});
     }
-  })
-  .get(function (req, res) {
     if (db) {
       var col = db.collection('counts');
       // Create a document with request IP and current time of request
@@ -86,6 +84,9 @@ router
     }
   })
   .post(parseUrlencoded, function (req, res) {
+    if (!db) {
+      initDb(function(err){});
+    }
 	var newQuest = req.body;
 	if (newQuest && newQuest.question.length>4) {
 	  var quest = new Object();
