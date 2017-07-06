@@ -197,6 +197,8 @@ app.post('/newQuestion', parseUrlencoded, function(req,res) {
 	}
 });
 
+app.use('/', router);
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
