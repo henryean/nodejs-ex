@@ -308,9 +308,10 @@ $ git push</pre>
                     </div>
 					<div>
 					<% for (var question in questionsList) { %>
-					  <p> <%= questionsList[question].question %> </p>
 					  <a href='/<%= questionsList[question]._id %>'><%= questionsList[question].question %></a>
-
+					  <form action='/<%= questionsList[question]._id %>' method="delete">
+					    <input type="submit" value="X">
+					  </form>
 					  <ul>
 					    <li><%= questionsList[question].answer1 %></li>
 					    <li><%= questionsList[question].answer2 %></li>

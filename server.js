@@ -104,7 +104,7 @@ router
 	}
   });
   
-  var ObjectId = require('mongodb').ObjectId;
+var ObjectId = require('mongodb').ObjectId;
   
 router.route('/:question')
   .get(function (request, response) {
@@ -120,16 +120,21 @@ router.route('/:question')
     }else{
       response.status(404).json("Question not found");
     }
-  });
+  })
 
-  //.delete(function (request, response) {
-//    if(cities[request.cityName]){
-//      delete cities[request.cityName];
-//      response.sendStatus(200);
-//    }else{
-//      response.sendStatus(404);
-//    }
-//  });
+  .delete(function (request, response) {
+	var quest = request.params.question;
+    if(quest){
+      if (db) {
+        var questions = db.collection('vragen');
+		questions.remove({"_id" : new ObjectId(quest)}, function(err, writeResult) {
+          response.status(200).json(writeResult);
+        });
+	  }
+    }else{
+      response.status(404).json("Question not found");;
+    }
+  });
 
 app.get('/old/', function (req, res) {
   // try to initialize the db on every request if it's not already
