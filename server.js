@@ -3,7 +3,8 @@ var express = require('express'),
     fs      = require('fs'),
     app     = express(),
     eps     = require('ejs'),
-    morgan  = require('morgan');
+    morgan  = require('morgan')
+	bodyParser = require('body-parser');
     
 Object.assign=require('object-assign')
 
@@ -58,7 +59,51 @@ var initDb = function(callback) {
   });
 };
 
-app.get('/', function (req, res) {
+var router = express.Router();
+var parseUrlencoded = bodyParser.urlencoded({ extended: false});
+
+router
+.route('/')
+  .all(function(req, res, next) {
+    if (!db) {
+      initDb(function(err){});
+    }
+  })
+  .get(function (req, res) {
+    if (db) {
+      var col = db.collection('counts');
+      // Create a document with request IP and current time of request
+      col.insert({ip: req.ip, date: Date.now()});
+	  var questionsList;
+	  db.collection('vragen').find().toArray(function(err, questions ){
+		questionsList = questions;
+	  });
+	  col.count(function(err, count){
+		res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList });
+	  });
+    } else {
+	  res.render('index.html', { pageCountMessage : null});
+    }
+  })
+  .post(parseUrlencoded, function (req, res) {
+	var newQuest = req.body;
+	if (newQuest && newQuest.question.length>4) {
+	  var quest = new Object();
+	  quest.question = newQuest.question;
+	  quest.answer1 = newQuest.answer1;
+	  quest.answer2 = newQuest.answer2;
+	  quest.answer3 = newQuest.answer3;
+      if (db) {
+        var questions = db.collection('vragen');
+	    questions.insert(quest);
+	    res.status(201).json(quest);
+      }
+	} else {
+		res.status(400).json('Invalid Question');
+	}
+});
+
+app.get('/old/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
@@ -131,12 +176,7 @@ app.get('/questions', function (req, res) {
   }
 });
 
-var bodyParser = require('body-parser');
-//var parseUrlencoded = bodyParser.urlencoded({ extended: false});
-//
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.post('/newQuestion', function(req,res) {
+app.post('/newQuestion', parseUrlencoded, function(req,res) {
 	var newQuest = req.body;
 	if (newQuest) {
 	var quest = new Object();
