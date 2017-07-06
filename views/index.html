@@ -309,7 +309,7 @@ $ git push</pre>
 					<div>
 					<% for (var question in questionsList) { %>
 					  <p> <%= questionsList[question].question %> </p>
-					  <a href="/"+<%= questionsList[question].question %>><%= questionsList[question].question %></a>
+					  <a href='/<%= questionsList[question]._id %>'><%= questionsList[question].question %></a>
 
 					  <ul>
 					    <li><%= questionsList[question].answer1 %></li>
