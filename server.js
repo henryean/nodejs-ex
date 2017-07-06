@@ -101,7 +101,7 @@ router
 	} else {
 		res.status(400).json('Invalid Question');
 	}
-});
+  });
 
 app.get('/old/', function (req, res) {
   // try to initialize the db on every request if it's not already
@@ -117,7 +117,6 @@ app.get('/old/', function (req, res) {
 	db.collection('vragen').find().toArray(function(err, questions ){
       questionsList = questions;
     });
-	//questions.insert({question: 'What is this?', answer1: 'An answer', answer2: 'Something else', answer3: 'Who knows'});
     col.count(function(err, count){
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList });
     });
