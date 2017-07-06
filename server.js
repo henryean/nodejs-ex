@@ -133,6 +133,7 @@ app.get('/questions', function (req, res) {
 
 var bodyParser = require('body-parser');
 //var parseUrlencoded = bodyParser.urlencoded({ extended: false});
+//
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/newQuestion', function(req,res) {
