@@ -104,15 +104,17 @@ router
 	}
   });
   
+  var ObjectId = require('mongodb').ObjectId;
+  
 router.route('/:question')
   .get(function (request, response) {
     var quest = request.params.question;
     if(quest){
       if (db) {
         var questions = db.collection('vragen');
-		questions.findOne({"_id" : quest}, function(err, doc) {
-        response.status(201).json(doc);
-    });
+		questions.findOne({"_id" : new ObjectId(quest)}, function(err, doc) {
+          response.status(201).json(doc);
+        });
 	    
       }
     }else{
