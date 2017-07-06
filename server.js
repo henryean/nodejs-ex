@@ -106,7 +106,7 @@ router
   
 router.route('/:question')
   .get(function (request, response) {
-    var quest = cities[request.params.question];
+    var quest = request.params.question;
     if(quest){
       if (db) {
         var questions = db.collection('vragen');
