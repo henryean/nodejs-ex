@@ -329,15 +329,11 @@ $ git push</pre>
 		  <script src="jquery.min.js"></script>
 		  <script type="text/javascript">
 			  $('.deleteSpan').click(function() {
-			    var id = this.attr('id');
+			    var id = $(this).attr('id');
 				var delPath = "/"+id;
-				$.ajax({
-			      url: delPath,
-                  method: 'DELETE'
-				})
-  .done(function( ) {
-    console.log("Deleted");
-  });
+				$.delete(delPath, function( res ) {
+				  console.log("Deleted");
+				});
 			  });
 		  </script>
         </footer>
