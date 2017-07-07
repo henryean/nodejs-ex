@@ -309,7 +309,7 @@ $ git push</pre>
 					<div>
 					<% for (var question in questionsList) { %>
 					  <a href='/<%= questionsList[question]._id %>'><%= questionsList[question].question %></a>
-					  <span id='<%= questionsList[question]._id %>' class="deleteSpan" >X</span>
+					  <button id='<%= questionsList[question]._id %>' class="deleteSpan" >X</button>
 					  <ul>
 					    <li><%= questionsList[question].answer1 %></li>
 					    <li><%= questionsList[question].answer2 %></li>
@@ -329,13 +329,16 @@ $ git push</pre>
 		  <script src="jquery.min.js"></script>
 		  <script type="text/javascript">
 		    $(document).ready(function(){
-			  $('.deleteSpan').click( function() {
+			  $('.deleteSpan').on('click', function(event) {
 			    var id = this.attr('id');
 				var delPath = "/"+id;
 				$.ajax({
 			      url: delPath,
                   method: 'DELETE'
-				});
+				})
+  .done(function(  ) {
+    console.log("Deleted");
+  });
 			  });
 			});
 		  </script>
