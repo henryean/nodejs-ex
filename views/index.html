@@ -312,6 +312,10 @@ $ git push</pre>
 					  <form action='/<%= questionsList[question]._id %>' method="delete">
 					    <input type="submit" value="X">
 					  </form>
+					  <a href='/<%= questionsList[question]._id %>' onclick="$.ajax({
+  url: '/<%= questionsList[question]._id %>',
+  method: 'DELETE'
+})">X</a>
 					  <ul>
 					    <li><%= questionsList[question].answer1 %></li>
 					    <li><%= questionsList[question].answer2 %></li>
