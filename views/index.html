@@ -312,10 +312,7 @@ $ git push</pre>
 					  <form action='/<%= questionsList[question]._id %>' method="delete">
 					    <input type="submit" value="X">
 					  </form>
-					  <a href='/<%= questionsList[question]._id %>' onclick="$.ajax({
-  url: '/<%= questionsList[question]._id %>',
-  method: 'DELETE'
-})">X</a>
+					  <span id='<%= questionsList[question]._id %>' class="deleteSpan" >X</span>
 					  <ul>
 					    <li><%= questionsList[question].answer1 %></li>
 					    <li><%= questionsList[question].answer2 %></li>
@@ -332,6 +329,18 @@ $ git push</pre>
 
         <footer>
           <div class="logo"><a href="https://www.openshift.com/"></a></div>
+		  <script type="text/javascript">
+		    $(document).ready(function(){
+			  $('.deleteSpan').click( function() {
+			    var id = this.attr('id');
+				var delPath = "/"+id;
+				$.ajax({
+			      url: delPath,
+                  method: 'DELETE'
+				});
+			  });
+			});
+		  </script>
         </footer>
 </section>
 </body>
