@@ -328,13 +328,16 @@ $ git push</pre>
           <div class="logo"><a href="https://www.openshift.com/"></a></div>
 		  <script src="jquery.min.js"></script>
 		  <script type="text/javascript">
-			  $('.deleteSpan').click(function() {
+		    $(document).ready(function () {
+			  $(".deleteSpan").click(function() {
 			    var id = $(this).attr('id');
 				var delPath = "/"+id;
-				$.delete(delPath, function( res ) {
-				  console.log("Deleted");
-				});
+				alert(delPath);
+//				$.delete(delPath, function( res ) {
+//				  console.log("Deleted");
+//				});
 			  });
+			});
 		  </script>
         </footer>
 </section>

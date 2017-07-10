@@ -121,7 +121,6 @@ router.route('/:question')
       response.status(404).json("Question not found");
     }
   })
-
   .delete(function (request, response) {
 	var quest = request.params.question;
     if(quest){
