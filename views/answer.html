@@ -6,6 +6,7 @@
   <title>Welcome to OpenShift</title>
   </head>
 <body>
+<% if (question) { %>
 <h3><%=question.question%></h3>
   <form action="/" method="post">
 	<fieldset class="form-field">
@@ -19,5 +20,6 @@
 	</fieldset>
 	<input type="submit" value="Submit">
   </form>
+<% } %>
 </body>
 </html>
