@@ -113,7 +113,8 @@ router.route('/:question')
       if (db) {
         var questions = db.collection('vragen');
 		questions.findOne({"_id" : new ObjectId(quest)}, function(err, doc) {
-          response.status(201).json(doc);
+          //response.status(201).json(doc);
+		  res.render('answer.html', { question: doc });
         });
 	    
       }
