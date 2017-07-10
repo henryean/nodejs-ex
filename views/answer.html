@@ -10,13 +10,13 @@
 <h3><%=question.question%></h3>
   <form action="/" method="post">
 	<fieldset class="form-field">
-	  <input type="radio" id="answer1Check" name="answer1Check"> <%=question.answer1%></input>
+	  <input type="radio" id="answer1Check" name="answerCheck" value="checkAnswer1"> <%=question.answer1%></input>
 	</fieldset>
 	<fieldset class="form-field">
-	  <input type="radio" id="answer2Check" name="answer2Check"> <%=question.answer2%></input>
+	  <input type="radio" id="answer2Check" name="answerCheck" value="checkAnswer2"> <%=question.answer2%></input>
 	</fieldset>
 	<fieldset class="form-field">
-	  <input type="radio" id="answer3Check" name="answer3Check"> <%=question.answer3%></input>
+	  <input type="radio" id="answer3Check" name="answerCheck" value="checkAnswer3"> <%=question.answer3%></input>
 	</fieldset>
 	<input type="submit" value="Submit">
   </form>
