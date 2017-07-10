@@ -210,6 +210,19 @@ pre {
 }
 
 </style>
+		  <script src="jquery.min.js"></script>
+		  <script type="text/javascript">
+		    $(document).ready(function () {
+			  $(".deleteSpan").click(function() {
+			    var id = $(this).attr('id');
+				var delPath = "/"+id;
+				alert(delPath);
+//				$.delete(delPath, function( res ) {
+//				  console.log("Deleted");
+//				});
+			  });
+			});
+		  </script>
 
 </head>
 <body>
@@ -326,19 +339,6 @@ $ git push</pre>
 
         <footer>
           <div class="logo"><a href="https://www.openshift.com/"></a></div>
-		  <script src="jquery.min.js"></script>
-		  <script type="text/javascript">
-		    $(document).ready(function () {
-			  $(".deleteSpan").click(function() {
-			    var id = $(this).attr('id');
-				var delPath = "/"+id;
-				alert(delPath);
-//				$.delete(delPath, function( res ) {
-//				  console.log("Deleted");
-//				});
-			  });
-			});
-		  </script>
         </footer>
 </section>
 </body>
