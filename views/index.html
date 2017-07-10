@@ -216,10 +216,9 @@ pre {
 			  $(".deleteSpan").click(function() {
 			    var id = $(this).attr('id');
 				var delPath = "/"+id;
-				alert(delPath);
-//				$.delete(delPath, function( res ) {
-//				  console.log("Deleted");
-//				});
+				$.delete(delPath, function( res ) {
+				  console.log("Deleted");
+				});
 			  });
 			});
 		  </script>
