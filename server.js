@@ -127,13 +127,13 @@ router.route('/:question')
   })
   .put(parseUrlencoded, function (request, response) {
 	var quest = request.params.question;
-	var answer = req.body;
+	var answer = req.body.answerCheck;
     if(quest && answer){
       if (db) {
         var questions = db.collection('vragen');
 		questions.update(
 		  {"_id" : new ObjectId(quest)},
-		  {$inc(answer.answerCheck, 1)},
+		  {$inc(answer, 1)},
 		  function(err, writeResult) {
           response.status(200).json(writeResult);
         });
