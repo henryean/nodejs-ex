@@ -110,23 +110,23 @@ router
 var ObjectId = require('mongodb').ObjectId;
   
 router.route('/:question')
-  .get(function (request, response) {
-    var quest = request.params.question;
+  .get(function (req, res) {
+    var quest = req.params.question;
     if(quest){
       if (db) {
         var questions = db.collection('vragen');
 		questions.findOne({"_id" : new ObjectId(quest)}, function(err, doc) {
-          //response.status(201).json(doc);
-		  response.render('answer.html', { question: doc });
+          //res.status(201).json(doc);
+		  res.render('answer.html', { question: doc });
         });
 	    
       }
     }else{
-      response.status(404).json("Question not found");
+      res.status(404).json("Question not found");
     }
   })
-  .post(parseUrlencoded, function (request, response) {
-	var quest = request.params.question;
+  .post(parseUrlencoded, function (req, res) {
+	var quest = req.params.question;
 	var answer = req.body.answerCheck;
     if(quest && answer){
       if (db) {
@@ -135,24 +135,24 @@ router.route('/:question')
 		  {"_id" : new ObjectId(quest)},
 		  {$inc : {answer: 1} },
 		  function(err, writeResult) {
-          response.status(200).json(writeResult);
+          res.status(200).json(writeResult);
         });
 	  }
     }else{
-      response.status(404).json("Question not found");;
+      res.status(404).json("Question not found");;
     }
   })
-  .delete(function (request, response) {
-	var quest = request.params.question;
+  .delete(function (req, res) {
+	var quest = req.params.question;
     if(quest){
       if (db) {
         var questions = db.collection('vragen');
 		questions.remove({"_id" : new ObjectId(quest)}, function(err, writeResult) {
-          response.status(200).json(writeResult);
+          res.status(200).json(writeResult);
         });
 	  }
     }else{
-      response.status(404).json("Question not found");;
+      res.status(404).json("Question not found");;
     }
   });
 
