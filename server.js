@@ -133,7 +133,7 @@ router.route('/:question')
         var questions = db.collection('vragen');
 		questions.update(
 		  {"_id" : new ObjectId(quest)},
-		  {$inc(answer, 1)},
+		  {$inc : {answer, 1}},
 		  function(err, writeResult) {
           response.status(200).json(writeResult);
         });
