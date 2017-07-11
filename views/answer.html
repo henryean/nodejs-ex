@@ -8,7 +8,7 @@
 <body>
 <% if (question) { %>
 <h3><%=question.question%></h3>
-  <form action="/" method="put">
+  <form action="/" method="post">
 	<fieldset class="form-field">
 	  <input type="radio" id="answer1Check" name="answerCheck" value="count1"> <%=question.answer1%></input>
 	</fieldset>

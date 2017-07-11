@@ -125,7 +125,7 @@ router.route('/:question')
       response.status(404).json("Question not found");
     }
   })
-  .put(parseUrlencoded, function (request, response) {
+  .post(parseUrlencoded, function (request, response) {
 	var quest = request.params.question;
 	var answer = req.body.answerCheck;
     if(quest && answer){
