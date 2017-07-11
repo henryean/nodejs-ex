@@ -94,6 +94,9 @@ router
 	  quest.answer1 = newQuest.answer1;
 	  quest.answer2 = newQuest.answer2;
 	  quest.answer3 = newQuest.answer3;
+	  quest.count1 = 0;
+	  quest.count2 = 0;
+	  quest.count3 = 0;
       if (db) {
         var questions = db.collection('vragen');
 	    questions.insert(quest);
@@ -120,6 +123,23 @@ router.route('/:question')
       }
     }else{
       response.status(404).json("Question not found");
+    }
+  })
+  .put(parseUrlencoded, function (request, response) {
+	var quest = request.params.question;
+	var answer = req.body;
+    if(quest && answer){
+      if (db) {
+        var questions = db.collection('vragen');
+		questions.update(
+		  {"_id" : new ObjectId(quest)},
+		  {$inc(answer.answerCheck, 1)},
+		  function(err, writeResult) {
+          response.status(200).json(writeResult);
+        });
+	  }
+    }else{
+      response.status(404).json("Question not found");;
     }
   })
   .delete(function (request, response) {

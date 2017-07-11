@@ -8,15 +8,15 @@
 <body>
 <% if (question) { %>
 <h3><%=question.question%></h3>
-  <form action="/" method="post">
+  <form action="/" method="put">
 	<fieldset class="form-field">
-	  <input type="radio" id="answer1Check" name="answerCheck" value="checkAnswer1"> <%=question.answer1%></input>
+	  <input type="radio" id="answer1Check" name="answerCheck" value="count1"> <%=question.answer1%></input>
 	</fieldset>
 	<fieldset class="form-field">
-	  <input type="radio" id="answer2Check" name="answerCheck" value="checkAnswer2"> <%=question.answer2%></input>
+	  <input type="radio" id="answer2Check" name="answerCheck" value="count2"> <%=question.answer2%></input>
 	</fieldset>
 	<fieldset class="form-field">
-	  <input type="radio" id="answer3Check" name="answerCheck" value="checkAnswer3"> <%=question.answer3%></input>
+	  <input type="radio" id="answer3Check" name="answerCheck" value="count3"> <%=question.answer3%></input>
 	</fieldset>
 	<input type="submit" value="Submit">
   </form>
