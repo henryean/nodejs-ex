@@ -131,12 +131,28 @@ router.route('/:question')
     if(quest && answer){
       if (db) {
         var questions = db.collection('vragen');
+		if (answer === "count1") {
 		questions.update(
 		  {"_id" : new ObjectId(quest)},
-		  {$inc : {answer: 1} },
+		  {$inc : {count1: 1} },
 		  function(err, writeResult) {
           res.status(200).json(writeResult);
         });
+		} else if (answer === "count2") {
+		questions.update(
+		  {"_id" : new ObjectId(quest)},
+		  {$inc : {count2: 1} },
+		  function(err, writeResult) {
+          res.status(200).json(writeResult);
+        });
+		} else if (answer === "count3") {
+		questions.update(
+		  {"_id" : new ObjectId(quest)},
+		  {$inc : {count3: 1} },
+		  function(err, writeResult) {
+          res.status(200).json(writeResult);
+        });
+		}
 	  }
     }else{
       res.status(404).json("Question not found");;
