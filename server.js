@@ -62,6 +62,8 @@ var initDb = function(callback) {
 var router = express.Router();
 var parseUrlencoded = bodyParser.urlencoded({ extended: false});
 
+var UserController = require('./controllers/usercontroller');
+
 router
 .route('/')
   .get(function (req, res) {
@@ -73,7 +75,9 @@ router
       // Create a document with request IP and current time of request
       col.insert({ip: req.ip, date: Date.now()});
 	  var questionsList;
-	  db.collection('vragen').find().toArray(function(err, questions ){
+	  UserController.setDatabase(db);
+	  //db.collection('vragen').find().toArray(function(err, questions ){
+	  UserController.findQuestions(function(err, questions ){
 		questionsList = questions;
 	  });
 	  col.count(function(err, count){
@@ -98,8 +102,10 @@ router
 	  quest.count2 = 0;
 	  quest.count3 = 0;
       if (db) {
-        var questions = db.collection('vragen');
-	    questions.insert(quest);
+	    UserController.setDatabase(db);
+		UserController.addQuestion(quest);
+        //var questions = db.collection('vragen');
+	    //questions.insert(quest);
 	    res.status(201).json(quest);
       }
 	} else {
