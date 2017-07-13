@@ -56,4 +56,4 @@ var DatabaseController = {
    }
 };
 
-module.exports = Controller;
+module.exports = DatabaseController;
