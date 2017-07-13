@@ -1,3 +1,10 @@
+var express = require('express'),
+    fs      = require('fs'),
+    app     = express(),
+    eps     = require('ejs'),
+    morgan  = require('morgan'),
+	bodyParser = require('body-parser');
+
 var DatabaseController = require('./databaseController');
 
 var Controller = {
@@ -6,7 +13,11 @@ var Controller = {
    setDatabase: function(db) { this._database = db; },
 
    findQuestions: function(callback) {
-	   DatabaseController.getDb().collection('vragen').find().toArray(callback);
+	   
+  var mongodb = require('mongodb');
+  
+	   var db = DatabaseController.getDb();
+	   db.collection('vragen').find().toArray(callback);
        //this._database.collection('vragen').find().toArray(callback);
    },
    
