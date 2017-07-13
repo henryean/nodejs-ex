@@ -62,7 +62,7 @@ var initDb = function(callback) {
 var router = express.Router();
 var parseUrlencoded = bodyParser.urlencoded({ extended: false});
 
-var UserController = require('./controllers/usercontroller');
+var UserController = require('./controllers/controller');
 
 router
 .route('/')
