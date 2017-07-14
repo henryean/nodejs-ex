@@ -59,6 +59,13 @@ var initDb = function(callback) {
   });
 };
 
+var getDb = function(callback) {
+	if (!db) {
+		initDb(function(err) {});
+	}
+	return db;
+}
+
 var router = express.Router();
 var parseUrlencoded = bodyParser.urlencoded({ extended: false});
 
@@ -72,21 +79,25 @@ router
     //  initDb(function(err){});
     //}
     //if (db) {
-      var col = DatabaseController.getDb().collection('counts');
+	if (getDb()) {
+      //var col = db.collection('counts');
       // Create a document with request IP and current time of request
-      col.insert({ip: req.ip, date: Date.now()});
+      //col.insert({ip: req.ip, date: Date.now()});
 	  var questionsList;
-	  //Controller.setDatabase(db);
+	  
+	  Controller.setDatabase(db);
+	  Controller.incrementCount();
 	  //db.collection('vragen').find().toArray(function(err, questions ){
 	  Controller.findQuestions(function(err, questions ){
 		questionsList = questions;
 	  });
-	  col.count(function(err, count){
+	  //col.count(function(err, count){
+	  Controller.getCount(function(err, count){
 		res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList });
 	  });
-    //} else {
-	//  res.render('index.html', { pageCountMessage : null});
-    //}
+    } else {
+	  res.render('index.html', { pageCountMessage : null});
+    }
   })
   .post(parseUrlencoded, function (req, res) {
     //if (!db) {
@@ -103,12 +114,13 @@ router
 	  quest.count2 = 0;
 	  quest.count3 = 0;
       //if (db) {
-	    //Controller.setDatabase(db);
+	  if (getDb()) {
+	    Controller.setDatabase(db);
 		Controller.addQuestion(quest);
         //var questions = db.collection('vragen');
 	    //questions.insert(quest);
 	    res.status(201).json(quest);
-      //}
+      }
 	} else {
 		res.status(400).json('Invalid Question');
 	}

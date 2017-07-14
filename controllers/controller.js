@@ -1,29 +1,41 @@
-var express = require('express'),
-    fs      = require('fs'),
-    app     = express(),
-    eps     = require('ejs'),
-    morgan  = require('morgan'),
-	bodyParser = require('body-parser');
 
-var DatabaseController = require('./databaseController');
+
+//var DatabaseController = require('./databaseController');
 
 var Controller = {
 	
    _database: null,
    setDatabase: function(db) { this._database = db; },
+   
+   incrementCount: function(req) {
+	   if (_database) {
+		   var col = _database.collection('counts');
+		   // Create a document with request IP and current time of request
+		   col.insert({ip: req.ip, date: Date.now()});
+	   }
+   },
+   
+   getCount: function(callback) {
+	   var col = db.collection('counts');
+	   col.count(callback);
+   },
 
    findQuestions: function(callback) {
 	   
-  var mongodb = require('mongodb');
+  //var mongodb = require('mongodb');
   
-	   var db = DatabaseController.getDb();
-	   db.collection('vragen').find().toArray(callback);
-       //this._database.collection('vragen').find().toArray(callback);
+	   //var db = DatabaseController.getDb();
+	   //db.collection('vragen').find().toArray(callback);
+	   if (_database) {
+		   this._database.collection('vragen').find().toArray(callback);
+	   }
    },
    
    addQuestion: function(quest) {
-	   DatabaseController.getDb().collection('vragen').insert(quest);
-	   //this._database.collection('vragen').insert(quest);
+	   //DatabaseController.getDb().collection('vragen').insert(quest);
+	   if (_database) {
+		   this._database.collection('vragen').insert(quest);
+	   }
    }
 };
 
