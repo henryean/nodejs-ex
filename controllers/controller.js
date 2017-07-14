@@ -8,7 +8,7 @@ var Controller = {
    setDatabase: function(db) { this._database = db; },
    
    incrementCount: function(req) {
-	   if (_database) {
+	   if (this._database) {
 		   var col = _database.collection('counts');
 		   // Create a document with request IP and current time of request
 		   col.insert({ip: req.ip, date: Date.now()});
@@ -16,8 +16,10 @@ var Controller = {
    },
    
    getCount: function(callback) {
-	   var col = db.collection('counts');
-	   col.count(callback);
+	   if (this._database) {
+		   var col = this._database.collection('counts');
+		   col.count(callback);
+	   }
    },
 
    findQuestions: function(callback) {
@@ -26,14 +28,14 @@ var Controller = {
   
 	   //var db = DatabaseController.getDb();
 	   //db.collection('vragen').find().toArray(callback);
-	   if (_database) {
+	   if (this._database) {
 		   this._database.collection('vragen').find().toArray(callback);
 	   }
    },
    
    addQuestion: function(quest) {
 	   //DatabaseController.getDb().collection('vragen').insert(quest);
-	   if (_database) {
+	   if (this._database) {
 		   this._database.collection('vragen').insert(quest);
 	   }
    }
