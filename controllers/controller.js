@@ -9,7 +9,7 @@ var Controller = {
    
    incrementCount: function(req) {
 	   if (this._database) {
-		   var col = _database.collection('counts');
+		   var col = this._database.collection('counts');
 		   // Create a document with request IP and current time of request
 		   col.insert({ip: req.ip, date: Date.now()});
 	   }
