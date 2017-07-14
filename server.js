@@ -63,15 +63,16 @@ var router = express.Router();
 var parseUrlencoded = bodyParser.urlencoded({ extended: false});
 
 var Controller = require('./controllers/controller');
+var DatabaseController = require('./controllers/databaseController');
 
 router
 .route('/')
   .get(function (req, res) {
-    if (!db) {
-      initDb(function(err){});
-    }
-    if (db) {
-      var col = db.collection('counts');
+    //if (!db) {
+    //  initDb(function(err){});
+    //}
+    //if (db) {
+      var col = DatabaseController.getDb().collection('counts');
       // Create a document with request IP and current time of request
       col.insert({ip: req.ip, date: Date.now()});
 	  var questionsList;
@@ -83,14 +84,14 @@ router
 	  col.count(function(err, count){
 		res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList });
 	  });
-    } else {
-	  res.render('index.html', { pageCountMessage : null});
-    }
+    //} else {
+	//  res.render('index.html', { pageCountMessage : null});
+    //}
   })
   .post(parseUrlencoded, function (req, res) {
-    if (!db) {
-      initDb(function(err){});
-    }
+    //if (!db) {
+    //  initDb(function(err){});
+    //}
 	var newQuest = req.body;
 	if (newQuest && newQuest.question.length>4) {
 	  var quest = new Object();
@@ -101,13 +102,13 @@ router
 	  quest.count1 = 0;
 	  quest.count2 = 0;
 	  quest.count3 = 0;
-      if (db) {
+      //if (db) {
 	    //Controller.setDatabase(db);
 		Controller.addQuestion(quest);
         //var questions = db.collection('vragen');
 	    //questions.insert(quest);
 	    res.status(201).json(quest);
-      }
+      //}
 	} else {
 		res.status(400).json('Invalid Question');
 	}
