@@ -95,14 +95,6 @@ router
   .post(parseUrlencoded, function (req, res) {
 	var newQuest = req.body;
 	if (newQuest && newQuest.question.length>4) {
-	  //var quest = new Object();
-	  //quest.question = newQuest.question;
-	  //quest.answer1 = newQuest.answer1;
-	  //quest.answer2 = newQuest.answer2;
-	  //quest.answer3 = newQuest.answer3;
-	  //quest.count1 = 0;
-	  //quest.count2 = 0;
-	  //quest.count3 = 0;
 	  var quest = createQuestion(newQuest);
 	  if (getDb()) {
 	    Controller.setDatabase(db);
@@ -123,7 +115,6 @@ router.route('/:question')
       if (db) {
         var questions = db.collection('vragen');
 		questions.findOne({"_id" : new ObjectId(quest)}, function(err, doc) {
-          //res.status(201).json(doc);
 		  res.render('answer.html', { question: doc });
         });
 	    
@@ -143,21 +134,18 @@ router.route('/:question')
 		  {"_id" : new ObjectId(quest)},
 		  {$inc : {count1: 1} },
 		  function(err, writeResult) {
-          //res.status(200).json(writeResult);
         });
 		} else if (answer === "count2") {
 		questions.update(
 		  {"_id" : new ObjectId(quest)},
 		  {$inc : {count2: 1} },
 		  function(err, writeResult) {
-          //res.status(200).json(writeResult);
         });
 		} else if (answer === "count3") {
 		questions.update(
 		  {"_id" : new ObjectId(quest)},
 		  {$inc : {count3: 1} },
 		  function(err, writeResult) {
-          //res.status(200).json(writeResult);
         });
 		}
 		res.redirect("/");
@@ -227,26 +215,10 @@ app.get('/questions', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-	//db.collection('questions').drop(function(err, callback){});
 	var questions = db.collection('vragen');
-	//var quest = new Object();
-	//quest.question = 'What is this?';
-	//quest.answer1 = 'An answer';
-	//quest.answer2 = 'Something else';
-	//quest.answer3 = 'Who knows';
-	//questions.insert(quest);
-	//var quest2 = new Object();
-	//quest2.question = 'How it going?';
-	//quest2.answer1 = 'Something';
-	//quest2.answer2 = 'good?';
-	//quest2.answer3 = 'Meh';
-	//questions.insert(quest2);
     questions.find().toArray(function(err, questionsList ){
       res.send(questionsList);
     });
-	//questions.count(function(err, count ){
-    //  res.send('{ questions: ' + count + '}');
-    //});
   } else {
     res.send('{ questions: -1 }');
   }
