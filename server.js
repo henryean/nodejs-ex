@@ -86,7 +86,7 @@ router
 	  var questionsList;
 	  
 	  Controller.setDatabase(db);
-	  Controller.incrementCount();
+	  Controller.incrementCount(req);
 	  //db.collection('vragen').find().toArray(function(err, questions ){
 	  Controller.findQuestions(function(err, questions ){
 		questionsList = questions;
