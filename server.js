@@ -75,23 +75,16 @@ var DatabaseController = require('./controllers/databaseController');
 router
 .route('/')
   .get(function (req, res) {
-    //if (!db) {
-    //  initDb(function(err){});
-    //}
-    //if (db) {
 	if (getDb()) {
-      //var col = db.collection('counts');
-      // Create a document with request IP and current time of request
-      //col.insert({ip: req.ip, date: Date.now()});
 	  var questionsList;
 	  
 	  Controller.setDatabase(db);
 	  Controller.incrementCount(req);
-	  //db.collection('vragen').find().toArray(function(err, questions ){
+	  
 	  Controller.findQuestions(function(err, questions ){
 		questionsList = questions;
 	  });
-	  //col.count(function(err, count){
+	  
 	  Controller.getCount(function(err, count){
 		res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails, questionsList: questionsList });
 	  });
@@ -100,25 +93,20 @@ router
     }
   })
   .post(parseUrlencoded, function (req, res) {
-    //if (!db) {
-    //  initDb(function(err){});
-    //}
 	var newQuest = req.body;
 	if (newQuest && newQuest.question.length>4) {
-	  var quest = new Object();
-	  quest.question = newQuest.question;
-	  quest.answer1 = newQuest.answer1;
-	  quest.answer2 = newQuest.answer2;
-	  quest.answer3 = newQuest.answer3;
-	  quest.count1 = 0;
-	  quest.count2 = 0;
-	  quest.count3 = 0;
-      //if (db) {
+	  //var quest = new Object();
+	  //quest.question = newQuest.question;
+	  //quest.answer1 = newQuest.answer1;
+	  //quest.answer2 = newQuest.answer2;
+	  //quest.answer3 = newQuest.answer3;
+	  //quest.count1 = 0;
+	  //quest.count2 = 0;
+	  //quest.count3 = 0;
+	  var quest = createQuestion(newQuest);
 	  if (getDb()) {
 	    Controller.setDatabase(db);
 		Controller.addQuestion(quest);
-        //var questions = db.collection('vragen');
-	    //questions.insert(quest);
 	    res.status(201).json(quest);
       }
 	} else {
@@ -299,5 +287,17 @@ initDb(function(err){
 
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
+
+var createQuestion = function(newQuest) {
+	var quest = new Object();
+	  quest.question = newQuest.question;
+	  quest.answer1 = newQuest.answer1;
+	  quest.answer2 = newQuest.answer2;
+	  quest.answer3 = newQuest.answer3;
+	  quest.count1 = 0;
+	  quest.count2 = 0;
+	  quest.count3 = 0;
+	  return quest;
+};
 
 module.exports = app ;
