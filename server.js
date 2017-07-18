@@ -107,6 +107,21 @@ router
 	}
   });
   
+router.route(/addQuestion)
+  .post(parseUrlencoded, function (req, res) {
+	var newQuest = req.body;
+	if (newQuest && newQuest.question.length>4) {
+	  var quest = createQuestion(newQuest);
+	  if (getDb()) {
+	    Controller.setDatabase(db);
+		Controller.addQuestion(quest);
+		res.redirect("/");
+      }
+	} else {
+		res.status(400).json('Invalid Question');
+	}
+  });
+  
 var ObjectId = require('mongodb').ObjectId;
   
 router.route('/:question')
