@@ -215,7 +215,7 @@ pre {
 		    $(document).ready(function () {
 			  $(".deleteSpan").click(function() {
 			    var id = $(this).attr('id');
-				var delPath = "/"+id;
+				var delPath = "/quest/"+id;
 				if (confirm("Are you sure you want to delete this?")) {
 				  $.ajax({
 				    url: delPath,
@@ -326,7 +326,7 @@ $ git push</pre>
 					<div>
 					<% for (var question in questionsList) { %>
 					<% var quest = questionsList[question]; %>
-					  <a href='/<%= quest._id %>'><%= quest.question %></a>
+					  <a href='/quest/<%= quest._id %>'><%= quest.question %></a>
 					  <button id='<%= questionsList[question]._id %>' class="deleteSpan" >X</button>
 					  <ul>
 					    <li><%= questionsList[question].answer1 %> - <%= questionsList[question].count1 %></li>

@@ -127,7 +127,7 @@ router.route('/addQuestion')
   
 var ObjectId = require('mongodb').ObjectId;
   
-router.route('/:question')
+router.route('/quest/:question')
   .get(function (req, res) {
     var quest = req.params.question;
     if(quest){
