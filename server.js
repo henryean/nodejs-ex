@@ -107,7 +107,7 @@ router
 	}
   });
   
-router.route(/addQuestion)
+router.route('/addQuestion')
   .post(parseUrlencoded, function (req, res) {
 	var newQuest = req.body;
 	if (newQuest && newQuest.question.length>4) {
