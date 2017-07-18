@@ -108,6 +108,9 @@ router
   });
   
 router.route('/addQuestion')
+  .get(function(req, res) {
+	  res.render('addQuestion.html');
+  })
   .post(parseUrlencoded, function (req, res) {
 	var newQuest = req.body;
 	if (newQuest && newQuest.question.length>4) {
