@@ -99,7 +99,8 @@ router
 	  if (getDb()) {
 	    Controller.setDatabase(db);
 		Controller.addQuestion(quest);
-	    res.status(201).json(quest);
+	    //res.status(201).json(quest);
+		res.redirect("/");
       }
 	} else {
 		res.status(400).json('Invalid Question');
